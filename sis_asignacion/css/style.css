@@ -1,0 +1,431 @@
+/* Reset Básico y Box Sizing */
+body, h1, h2, p, div, ul, li {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+    line-height: 1.6;
+    color: #333; /* Color de texto general */
+}
+
+/* Contenedor principal de la página */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Cabecera (Header) --- */
+header {
+    background: linear-gradient(to bottom, #2c3e50, #3a536b);
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    position: relative;
+    padding-left: 100px; /* Espacio para el logo */
+}
+
+.header-logo-absolute {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60px; /* Tamaño del logo */
+    width: auto;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.2em;
+    white-space: nowrap; /* Evita que el título se rompa en varias líneas */
+    margin-bottom: 10px;
+}
+
+/* Navegación (Nav) */
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #1abc9c; /* Color al pasar el ratón */
+}
+
+/* --- Layout Principal de Dos Columnas --- */
+.content-wrapper {
+    display: flex;
+    gap: 25px; /* Espacio entre la columna principal y la lateral */
+    flex-wrap: wrap; /* Permite que las columnas se apilen en pantallas pequeñas */
+    align-items: stretch; /* Hace que las columnas main-content y sidebar-forms tengan la misma altura */
+}
+
+.main-content {
+    flex: 3; /* La columna principal toma más espacio */
+    min-width: 650px; /* Ancho mínimo para la columna principal */
+    margin-top: 0; /* Asegura que no tenga margen superior */
+}
+
+.sidebar-forms {
+    flex: 1; /* La barra lateral toma menos espacio */
+    min-width: 400px; /* Ancho mínimo para la barra lateral */
+    display: flex; /* Habilitar Flexbox para los formularios de agregar */
+    flex-direction: column; /* Apilar los formularios verticalmente */
+    justify-content: space-between; /* Distribuye el espacio entre los formularios (Profesor arriba, Materia abajo) */
+    margin-top: 0; /* Asegura que no tenga margen superior */
+    /* Se eliminó 'gap' aquí porque 'justify-content' lo gestiona para los hijos directos */
+}
+
+/* Estilos para las secciones principales (formularios, mapa, tablas) */
+section {
+    background-color: #ffffff;
+    padding: 30px;
+    margin-bottom: 25px; /* Margen inferior global para separación entre secciones */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+section h2 {
+    color: #34495e;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+/* Estilos para los form-group (comunes en todos los formularios) */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group input[type="time"],
+.form-group input[type="email"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus,
+.form-group input[type="date"]:focus,
+.form-group input[type="time"]:focus,
+.form-group input[type="email"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+button[type="submit"] {
+    background-color: #2ecc71;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Ocupa todo el ancho disponible */
+}
+
+button[type="submit"]:hover {
+    background-color: #27ae60;
+}
+
+/* --- Estilos para el Mapa de Aulas (Imagen Interactiva) --- */
+#mapa-imagen-interactivo {
+    text-align: center;
+}
+
+#mapa-imagen-interactivo p {
+    margin-bottom: 20px;
+    color: #666;
+}
+
+#mapa-imagen-interactivo .mapa-completo {
+    max-width: 700px; /* Puedes ajustar este valor para controlar el tamaño máximo del mapa */
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Centra el contenedor del mapa */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#mapa-imagen-interactivo .mapa-completo img {
+    max-width: 100%; /* Asegura que la imagen se ajuste a su contenedor padre */
+    height: auto;
+    display: block; /* Elimina cualquier espacio extra debajo de la imagen */
+}
+
+/* --- Estilos para los checkboxes de asignación anual --- */
+.form-group.checkbox-group label {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+.form-group.checkbox-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Estilos para los checkboxes de días de la semana */
+.days-of-week-checkboxes {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los checkboxes se envuelvan a la siguiente línea */
+    gap: 10px; /* Espacio entre los checkboxes */
+    margin-top: 5px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.days-of-week-checkboxes label {
+    display: flex; /* Para alinear el checkbox y el texto */
+    align-items: center; /* Alinea verticalmente */
+    font-weight: normal;
+    color: #555;
+    margin-bottom: 0; /* Asegura que no haya margen extra entre ellos */
+    cursor: pointer;
+    white-space: nowrap; /* Evita que el texto del día se rompa */
+}
+
+.days-of-week-checkboxes input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+    flex-shrink: 0; /* Evita que el checkbox se encoja */
+}
+
+/* --- Estilos para la tabla de Asignaciones --- */
+.view-options {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.view-options .view-btn {
+    background-color: #ecf0f1;
+    color: #34495e;
+    border: 1px solid #bdc3c7;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    flex-grow: 1; /* Permite que los botones crezcan para llenar el espacio */
+    max-width: 150px; /* Ancho máximo para los botones de vista */
+}
+
+.view-options .view-btn:hover {
+    background-color: #dbe4e6;
+    border-color: #95a5a6;
+}
+
+.view-options .view-btn.active {
+    background-color: #3498db;
+    color: white;
+    border-color: #2980b9;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+#asignaciones-actuales table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+#asignaciones-actuales th,
+#asignaciones-actuales td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+#asignaciones-actuales th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+}
+
+#asignaciones-actuales tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#asignaciones-actuales tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+#no-asignaciones-msg {
+    text-align: center;
+    color: #666;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+/* --- Pie de Página (Footer) --- */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #333;
+    color: white;
+    border-radius: 0 0 8px 8px;
+    margin-top: 30px; /* Margen superior para separar del último contenido */
+}
+
+/* --- Media Queries (para responsividad) --- */
+@media (max-width: 1100px) {
+    .content-wrapper {
+        flex-direction: column; /* Apilar las columnas principales */
+    }
+    .main-content,
+    .sidebar-forms {
+        flex: auto; /* Permite que ocupen el espacio disponible */
+        min-width: unset; /* Quitar ancho mínimo en pantallas pequeñas */
+    }
+    /* Añadir margen inferior a las secciones cuando se apilan las columnas */
+    .main-content section,
+    .sidebar-forms section {
+        margin-bottom: 25px; /* Re-añadir margen inferior para separación */
+    }
+    /* Quitar el margen inferior de la última sección en las columnas apiladas */
+    .main-content section:last-child,
+    .sidebar-forms section:last-child {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding-left: 20px; /* Reducir padding izquierdo */
+        padding-top: 80px; /* Aumentar padding superior para el logo */
+        text-align: center;
+    }
+    .header-logo-absolute {
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%); /* Centra el logo horizontalmente */
+        height: 50px; /* Tamaño más pequeño del logo */
+    }
+    header h1 {
+        font-size: 1.8em;
+    }
+    nav ul {
+        flex-wrap: wrap; /* Permite que los ítems del menú se envuelvan */
+        justify-content: center;
+    }
+    nav ul li {
+        margin: 5px 10px; /* Margen más pequeño entre ítems del menú */
+    }
+    /* En móviles, la sidebar debe apilar sus formularios con un margen regular */
+    .sidebar-forms {
+        justify-content: flex-start; /* Cambia a flex-start para apilarlos normalmente */
+        gap: 20px; /* Espacio entre los formularios de profesor y materia */
+    }
+    .sidebar-forms section:last-child {
+        margin-bottom: 0; /* Asegura que el último formulario no tenga margen inferior extra */
+    }
+}
+
+@media (max-width: 600px) {
+    /* Estilos para tablas responsivas en pantallas muy pequeñas */
+    #asignaciones-actuales table {
+        display: block;
+        overflow-x: auto; /* Permite desplazamiento horizontal si la tabla es demasiado ancha */
+        white-space: nowrap; /* Evita que el texto de la tabla se rompa */
+    }
+    #asignaciones-actuales thead, #asignaciones-actuales tbody, #asignaciones-actuales th, #asignaciones-actuales td, #asignaciones-actuales tr {
+        display: block; /* Hace que todos los elementos de la tabla se comporten como bloques */
+    }
+    #asignaciones-actuales th, #asignaciones-actuales td {
+        white-space: normal; /* Vuelve al comportamiento normal del texto dentro de las celdas */
+        text-align: left;
+    }
+    #asignaciones-actuales thead tr {
+        position: absolute; /* Oculta la fila de encabezado de la tabla */
+        top: -9999px;
+        left: -9999px;
+    }
+    #asignaciones-actuales tr {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        display: flex; /* Habilita flexbox para las filas */
+        flex-direction: column; /* Apila las celdas verticalmente dentro de cada fila */
+    }
+    #asignaciones-actuales td:before {
+        content: attr(data-label); /* Usa el atributo data-label para mostrar el encabezado */
+        font-weight: bold;
+        display: inline-block;
+        width: 100px; /* Ancho para el "encabezado" en cada celda */
+        margin-right: 15px;
+    }
+
+
+#tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ddd;
+}
+
+#tab-content.active {
+    display: block;
+}
+
+#tab-btn {
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #f1f1f1;
+}
+
+#tab-btn.active {
+    background-color: #007bff;
+    color: white;
+}
+}

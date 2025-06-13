@@ -1,0 +1,125 @@
+const tablaMatutinas = document.querySelector("#asignaciones-matutinas tbody");
+const tablaVespertinas = document.querySelector("#asignaciones-vespertinas tbody");
+const tablaNocturnas = document.querySelector("#asignaciones-nocturnas tbody");
+
+const contenedorMatutinas = document.getElementById("tab-content-matutinas");
+const contenedorVespertinas = document.getElementById("tab-content-vespertinas");
+const contenedorNocturnas = document.getElementById("tab-content-nocturnas");
+
+const mensajeNoAsignaciones = document.getElementById("no-asignaciones-msg");
+
+let diaSeleccionado = null;
+let asignaciones = { matutinas: [], vespertinas: [], nocturnas: [] };
+
+// Ocultar todas las tablas al inicio
+contenedorMatutinas.style.display = "none";
+contenedorVespertinas.style.display = "none";
+contenedorNocturnas.style.display = "none";
+mensajeNoAsignaciones.style.display = "none";
+
+function cargarAsignaciones(dia) {
+    let url = "../includes/get_asignaciones.php";
+    if (dia !== "Todas") {
+        url += `?dia=${dia.toLowerCase()}`;
+    }
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log("Asignaciones procesadas para", dia, ":", data);
+
+            tablaMatutinas.innerHTML = "";
+            tablaVespertinas.innerHTML = "";
+            tablaNocturnas.innerHTML = "";
+
+            asignaciones = { matutinas: [], vespertinas: [], nocturnas: [] };
+
+            if (data.length === 0) {
+                mensajeNoAsignaciones.style.display = "block";
+            } else {
+                mensajeNoAsignaciones.style.display = "none";
+
+                data.forEach(asignacion => {
+                    const fila = document.createElement("tr");
+                    fila.innerHTML = `
+                        <td><input type="checkbox" class="seleccion" name="asignacion[]" value="${asignacion.id}"></td>
+                        <td>${asignacion.carrera}</td>
+                        <td>${asignacion.anio}</td>
+                        <td>${asignacion.materia}</td>
+                        <td>${asignacion.profesor}</td>
+                        <td>${asignacion.aula}</td>
+                        <td>${asignacion.hora_inicio} - ${asignacion.hora_fin}</td>
+                    `;
+
+                    const horaInicio = parseInt(asignacion.hora_inicio.split(":")[0]);
+
+                    if (horaInicio >= 8 && horaInicio < 13) {
+                        asignaciones.matutinas.push(fila);
+                    } else if (horaInicio >= 13 && horaInicio < 19) {
+                        asignaciones.vespertinas.push(fila);
+                    } else {
+                        asignaciones.nocturnas.push(fila);
+                    }
+                });
+            }
+        })
+        .catch(error => console.error("Error al cargar asignaciones:", error));
+}
+
+// Resalta el botón de día cuando se selecciona
+botonesVista.forEach(boton => {
+    boton.addEventListener("click", function () {
+        diaSeleccionado = this.getAttribute("data-view");
+        console.log("Día seleccionado:", diaSeleccionado);
+
+        // Limpiar y ocultar todas las tablas al cambiar de día
+        tablaMatutinas.innerHTML = "";
+        tablaVespertinas.innerHTML = "";
+        tablaNocturnas.innerHTML = "";
+        contenedorMatutinas.style.display = "none";
+        contenedorVespertinas.style.display = "none";
+        contenedorNocturnas.style.display = "none";
+        mensajeNoAsignaciones.style.display = "none";
+
+        // Cargar asignaciones del nuevo día seleccionado
+        cargarAsignaciones(diaSeleccionado);
+
+        // Resalta el botón de día seleccionado
+        botonesVista.forEach(btn => btn.classList.remove("active"));
+        this.classList.add("active");
+    });
+});
+
+// Resalta el botón de turno cuando se selecciona
+tabButtons.forEach(button => {
+    button.addEventListener("click", function () {
+        if (!diaSeleccionado) {
+            alert("Por favor, seleccione un día antes de elegir un turno.");
+            return;
+        }
+
+        const tabSeleccionado = this.getAttribute("data-tab");
+
+        contenedorMatutinas.style.display = "none";
+        contenedorVespertinas.style.display = "none";
+        contenedorNocturnas.style.display = "none";
+
+        tablaMatutinas.innerHTML = "";
+        tablaVespertinas.innerHTML = "";
+        tablaNocturnas.innerHTML = "";
+
+        if (tabSeleccionado === "matutinas") {
+            asignaciones.matutinas.forEach(fila => tablaMatutinas.appendChild(fila));
+            contenedorMatutinas.style.display = "block";
+        } else if (tabSeleccionado === "vespertinas") {
+            asignaciones.vespertinas.forEach(fila => tablaVespertinas.appendChild(fila));
+            contenedorVespertinas.style.display = "block";
+        } else if (tabSeleccionado === "nocturnas") {
+            asignaciones.nocturnas.forEach(fila => tablaNocturnas.appendChild(fila));
+            contenedorNocturnas.style.display = "block";
+        }
+
+        tabButtons.forEach(btn => btn.classList.remove("active"));
+        this.classList.add("active");
+    });
+});
