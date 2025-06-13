@@ -2,7 +2,7 @@
 $host = 'localhost';
 $user = 'root'; // por defecto en XAMPP
 $password = ''; // en XAMPP, suele estar vacío
-$dbname = 'gestion_aulas';
+$dbname = 'sis_asignacion';
 
 $conexion = new mysqli("localhost", "root", "", "sis_asignacion");
 if ($conexion->connect_error) {

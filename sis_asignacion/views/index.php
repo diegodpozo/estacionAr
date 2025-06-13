@@ -17,7 +17,7 @@ include '../config/conexion.php';
         <h1>Sistema de Asignación de Aulas</h1>
         <nav>
             <ul>
-                <li><a href="index.php">Inicio</a></li>
+                <li><a href="index.html">Inicio</a></li>
              
                 <li><a href="asignaciones.php">Asignaciones</a></li>
                 <li><a href="aulas.php">Aulas</a></li>

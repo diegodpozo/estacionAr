@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (horaInicio >= 18 && horaFin <= 22) {
             return "nocturno";
         } else {
-            return null; // Fuera del rango establecido
+            return null;
         }
     }
 

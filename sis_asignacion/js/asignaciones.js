@@ -68,11 +68,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 `;
 
                 const horaInicio = parseInt(asignacion.hora_inicio.split(":")[0]);
+                const horaFin = parseInt(asignacion.hora_fin.split(":")[0]);
 
                 let turno;
-                if (horaInicio >= 8 && horaFin >= 13) {
+                if (horaInicio >= 8 && horaFin <= 13) {
                     turno = "matutinas";
-                } else if (horaInicio >= 13 && horaFin >= 18) {
+                } else if (horaInicio >= 13 && horaFin <= 18) {
                     turno = "vespertinas";
                 } else {
                     turno = "nocturnas";
